@@ -45,11 +45,6 @@ doSphPlot<-function(data, value, legend_name, what='prova', minv=-2, maxv=2, tic
         labs(fill = legend_name, x = NULL, y = NULL) +
         theme(panel.background = element_blank())
 
-        # coord_sf(crs = '+proj=moll') #+ # desired projection
-        # labs(fill = "Energy (dB)") # legend title
-        # scale_fill_continuous(limits=c(-3, 3), breaks=seq(-1,1,by=0.5))  # https://stackoverflow.com/questions/14220975/increasing-the-legend-range-in-geom-tile-manually
-        ## and: https://stackoverflow.com/questions/44314251/specifying-same-limits-for-colorbar-legend-in-ggplot2/44314538
-
     nome = paste(what, '.png', sep = "", collapse = NULL)
     ggsave(nome, width = 15, units = "cm")
     nome = paste(what, '.pdf', sep = "", collapse = NULL)
@@ -59,16 +54,13 @@ doSphPlot<-function(data, value, legend_name, what='prova', minv=-2, maxv=2, tic
 
 
 # Import data
-
 files_list <- c('wv0_interp_704_physics', 'wv1_interp_704_physics', 'ambi2_704_physics', 'ambi3_704_physics', 'vbap_pressure_704_physics')
-# files_list <- c('vbap_pressure_704_physics')
 modes <- c(1, 2, 3)
 for(mode in modes)
     {
     for (filename in files_list){
         data_path <- paste(filename, '.txt', sep = "", collapse = NULL)
         data <- read.csv(data_path, header = FALSE)
-#         data <- data %>% filter(V1 != 180 & V2 != 90) # equivalent to data <- filter(data, V1 ...)
 
         invert=1
         if(mode == 1){
@@ -79,8 +71,8 @@ for(mode in modes)
         value = 10*log10(value)
         minv = -2.5  # for Ambi and SWF
         maxv =  2
-        minv = -5  # for vbap
-        maxv =  0
+#         minv = -5  # for vbap
+#         maxv =  0
         ticks = 0.5
         print("Doing energy.")
         }
@@ -120,14 +112,4 @@ for(mode in modes)
 }
 
 print("Done.")
-
-# Energy
-# max: 1.5648   min: 0.0000
-#
-# Radial Intensity
-# max: 1.0000   min: -0.0184
-#
-# Transverse Intensity
-# max: 0.6766   min: 0.0000
-# max: 42.5813   min: 0.0000
 
