@@ -41,7 +41,7 @@ doSphPlot<-function(data, value, legend_name, what='prova', minv=-2, maxv=2, tic
         scale_fill_viridis_c(limits=c(minv, maxv), breaks=seq(minv, maxv,by=ticks), direction=invert) +
         scale_color_viridis_c(limits=c(minv, maxv), breaks=seq(minv, maxv,by=ticks), guide = FALSE, direction=invert) +
 
-        coord_sf(crs = st_crs(54009)) +
+        coord_sf(crs = st_crs('ESRI:54009')) +
         labs(fill = legend_name, x = NULL, y = NULL) +
         theme(panel.background = element_blank())
 
